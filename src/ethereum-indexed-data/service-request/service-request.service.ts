@@ -90,7 +90,6 @@ export class ServiceRequestService {
     }
 
     // Restructure data into array
-    
     const requestByCountryList: Array<RequestsByCountry> = [];
     for (const countryCode in requestByCountryDict) {
       const countryObj = await this.countryService.getByIso2Code(countryCode);
