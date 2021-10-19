@@ -40,13 +40,13 @@ export class LabService {
       searchObj.from = from;
       searchObj.size = _size;
     }
-    const result = []
+    // let services = []
     const labs = await this.elasticsearchService.search(searchObj);
     labs.body.hits.hits.forEach(lab => {
-    result.push(lab._source.services.find( ({info}) => info['category'] === category))
-      
+      lab._source.services = lab._source.services.filter( ({info}) => info['category'] === category)       
     });
+    console.log(JSON.stringify(labs, null, 2));
     
-    return { result };
+    return { result : labs.body.hits };
   }
 }
